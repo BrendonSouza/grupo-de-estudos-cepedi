@@ -1,11 +1,19 @@
 package com.universidade.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Professor implements Serializable {
@@ -16,7 +24,22 @@ public class Professor implements Serializable {
   private Integer id;
   private String nome;
   private String endereco;
+
+  @JsonIgnore
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "departamento_id")
   private Departamento departamento;
+
+  @ManyToMany(mappedBy = "professores")
+  private List<Curso> cursos = new ArrayList<>();
+
+  public List<Curso> getCursos() {
+    return cursos;
+  }
+
+  public void setCursos(List<Curso> cursos) {
+    this.cursos = cursos;
+  }
 
   public Professor(){
   
