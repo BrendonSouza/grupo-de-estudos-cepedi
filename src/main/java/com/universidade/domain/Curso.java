@@ -30,6 +30,12 @@ public class Curso implements Serializable{
   @ManyToOne(cascade = CascadeType.PERSIST)
   private Departamento departamento;
 
+
+  @JsonIgnore
+  @ManyToMany(cascade = { CascadeType.ALL })
+  @JoinTable(name = "CURSO_MATERIA", joinColumns = @JoinColumn(name = "curso_id"), inverseJoinColumns = @JoinColumn(name = "materia_id"))
+  private List<Materia> materias= new ArrayList<>();
+
   @JsonIgnore
   @ManyToMany(cascade = { CascadeType.ALL })
   @JoinTable(name = "CURSO_PROFESSOR", joinColumns = @JoinColumn(name = "curso_id"), inverseJoinColumns = @JoinColumn(name = "professor_id"))
@@ -39,13 +45,6 @@ public class Curso implements Serializable{
   @JoinColumn(name="colegiado_id",referencedColumnName = "id")
   private Colegiado colegiado;
 
-  public Colegiado getColegiado() {
-    return colegiado;
-  }
-
-  public void setColegiado(Colegiado colegiado) {
-    this.colegiado = colegiado;
-  }
 
   public Curso(){}
 
@@ -55,6 +54,25 @@ public class Curso implements Serializable{
     this.departamento = departamento;
   }
 
+
+
+  public Colegiado getColegiado() {
+    return colegiado;
+  }
+
+  public void setColegiado(Colegiado colegiado) {
+    this.colegiado = colegiado;
+  }
+
+
+
+  public List<Materia> getMaterias() {
+    return materias;
+  }
+
+  public void setMaterias(List<Materia> materias) {
+    this.materias = materias;
+  }
   public Integer getId() {
     return id;
   }
