@@ -1,8 +1,6 @@
 package com.universidade.services;
 
-import java.text.ParseException;
 import java.util.Arrays;
-
 import com.universidade.domain.Colegiado;
 import com.universidade.domain.Curso;
 import com.universidade.domain.Departamento;
@@ -30,7 +28,7 @@ public class DBService {
 	@Autowired
 	private MateriaRepository materiaRepository;
   
-  public void instantiateTestDatabase() throws ParseException{
+  public void instantiateTestDatabase() {
     Departamento dpto1= new Departamento(null,"DCET");
 		Professor prof1= new Professor("Teste", "Testas", dpto1);
 		Curso curso1=new Curso(null,"cic",dpto1);
