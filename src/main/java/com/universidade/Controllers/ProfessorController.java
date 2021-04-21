@@ -3,8 +3,9 @@ package com.universidade.Controllers;
 import java.net.URI;
 import java.util.List;
 
-import com.universidade.domain.Departamento;
-import com.universidade.services.DepartamentoService;
+import com.universidade.domain.Professor;
+import com.universidade.dto.ProfessorNewDTO;
+import com.universidade.services.ProfessorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,24 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping(value = "/departamento")
-public class DepartamentoController {
+@RequestMapping(value = "/professor")
+public class ProfessorController {
   @Autowired
-  DepartamentoService service;
+  ProfessorService service;
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Departamento> findDpto(@PathVariable Integer id){
-    Departamento obj = service.find(id);
+  public ResponseEntity<Professor> findDpto(@PathVariable Integer id){
+    Professor obj = service.find(id);
     return ResponseEntity.ok().body(obj);
   } 
 
   @RequestMapping
-  public ResponseEntity<List<Departamento>> findAll(){
+  public ResponseEntity<List<Professor>> findAll(){
     return ResponseEntity.ok().body(service.findAll());
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Void> insert(@RequestBody  Departamento obj){
+  public ResponseEntity<Void> insert(@RequestBody  ProfessorNewDTO objDT){
+    Professor obj=service.fromDTO(objDT);
     obj=service.insert(obj);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
     return ResponseEntity.created(uri).build();

@@ -15,6 +15,8 @@ public class DepartamentoService {
   @Autowired
   DepartamentoRepository departamentoRepository;
 
+  
+  
   public Departamento find(Integer id) {
     Optional<Departamento> obj = departamentoRepository.findById(id);
     return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -23,6 +25,13 @@ public class DepartamentoService {
 
   public List<Departamento> findAll(){
     return departamentoRepository.findAll();
+  }
+
+  public Departamento insert(Departamento obj){
+    obj.setId(null);
+    obj=departamentoRepository.save(obj);
+    
+    return obj;
   }
 
 
