@@ -2,14 +2,14 @@ package com.universidade.dto;
 
 import java.io.Serializable;
 
-import com.universidade.domain.Departamento;
+
 
 public class ProfessorDTO implements Serializable{
   private static final long serialVersionUID = 1L;
 
   private String nome;
   private String endereco;
-  // private Departamento departamento;
+
 
   public ProfessorDTO(){}
 

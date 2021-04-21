@@ -3,9 +3,9 @@ package com.universidade.Controllers;
 import java.net.URI;
 import java.util.List;
 
-import com.universidade.domain.Professor;
-import com.universidade.dto.ProfessorNewDTO;
-import com.universidade.services.ProfessorService;
+import com.universidade.domain.Curso;
+import com.universidade.dto.CursoNewDTO;
+import com.universidade.services.CursoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping(value = "/professor")
-public class ProfessorController {
+@RequestMapping(value = "/curso")
+public class CursoController {
   @Autowired
-  ProfessorService service;
+  CursoService service;
   //show
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Professor> findDpto(@PathVariable Integer id){
-    Professor obj = service.find(id);
+  public ResponseEntity<Curso> findDpto(@PathVariable Integer id){
+    Curso obj = service.find(id);
     return ResponseEntity.ok().body(obj);
   } 
   //index
   @RequestMapping
-  public ResponseEntity<List<Professor>> findAll(){
+  public ResponseEntity<List<Curso>> findAll(){
     return ResponseEntity.ok().body(service.findAll());
   }
   //create & store
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Void> insert(@RequestBody  ProfessorNewDTO objDT){
-    Professor obj=service.fromDTO(objDT);
+  public ResponseEntity<Void> insert(@RequestBody  CursoNewDTO objDTO){
+    Curso obj=service.fromDTO(objDTO);
     obj=service.insert(obj);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
     return ResponseEntity.created(uri).build();
