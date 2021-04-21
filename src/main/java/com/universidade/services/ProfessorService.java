@@ -38,7 +38,8 @@ public class ProfessorService {
 
   public Professor fromDTO(ProfessorNewDTO objDTO){
     Optional<Departamento> depto=departamentoRepository.findById(objDTO.getDepartamentoId());
-    Departamento dpt=depto.get();
+    Departamento dpt=depto.orElseThrow(() -> new ObjectNotFoundException(
+      "Departamento não cadastrado!"));
     Professor prof= new Professor(objDTO.getNome(), objDTO.getEndereco(), dpt);
     return prof;
   }
