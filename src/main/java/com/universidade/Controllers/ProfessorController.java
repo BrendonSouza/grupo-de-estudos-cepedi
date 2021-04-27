@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import com.universidade.domain.Professor;
+import com.universidade.dto.ProfessorDTO;
 import com.universidade.dto.ProfessorNewDTO;
 import com.universidade.services.ProfessorService;
 
@@ -46,5 +47,16 @@ public class ProfessorController {
     service.delete(id);
     return ResponseEntity.noContent().build();
   }
+
+  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+
+  public ResponseEntity<Void> update(@RequestBody ProfessorDTO objDTO, @PathVariable Integer id) {
+    Professor obj = service.fromDTO(objDTO);
+    obj.setId(id);
+    obj = service.update(obj);
+    return ResponseEntity.noContent().build();
+
+  }
+  
   
 }

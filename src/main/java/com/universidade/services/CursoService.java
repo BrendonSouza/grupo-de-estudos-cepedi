@@ -28,6 +28,8 @@ public class CursoService {
   // @Autowired
   // private CursoRepository cursoRepository;
   public Curso find(Integer id) {
+    if(id<0||id==null)
+      throw new IllegalArgumentException("O Id Informado é inválido: "+id);
     Optional<Curso> obj = cursoRepository.findById(id);
     return obj.orElseThrow(() -> new ObjectNotFoundException(
         "Curso não encontrado cara! Id: " + id + ", Tipo: " + Curso.class.getName()));

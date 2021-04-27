@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+
 
 @Entity
 public class Departamento implements Serializable{
@@ -19,6 +22,9 @@ public class Departamento implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
+  
+  @NotEmpty(message = "Nome não pode ser vazio")
   private String nome;
 
   @OneToMany(mappedBy = "departamento", cascade=CascadeType.ALL)

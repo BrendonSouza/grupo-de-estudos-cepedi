@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
 @Entity
 public class Curso implements Serializable{
   private static final long serialVersionUID = 1L;
@@ -24,6 +26,7 @@ public class Curso implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
   private String nome;
 
   @JsonIgnore

@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Colegiado implements Serializable{
@@ -15,7 +17,12 @@ public class Colegiado implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+  @NotNull(message = "Nome do colegiado nao pode ser nulo")
+  @NotEmpty(message = "Nome nao pode ser vazio")
   private String nome;
+
+  @OneToOne(mappedBy = "colegiado")
+  private Curso curso;
 
 
   public Colegiado(Integer id, String nome, Curso curso) {
@@ -23,10 +30,6 @@ public class Colegiado implements Serializable{
     this.nome = nome;
     this.curso = curso;
   }
-  
-  @OneToOne(mappedBy = "colegiado")
-  private Curso curso;
-
   public Colegiado(){}
 
 

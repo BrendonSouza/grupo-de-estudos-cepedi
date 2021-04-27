@@ -30,13 +30,15 @@ public class DBService {
   
   public void instantiateTestDatabase() {
     Departamento dpto1= new Departamento(null,"DCET");
-		Professor prof1= new Professor("Teste", "Testas", dpto1);
+		Professor prof1= new Professor(null,"Teste", "Testas", dpto1);
 		Curso curso1=new Curso(null,"cic",dpto1);
+		Curso curso2=new Curso(null,"curso2",dpto1);
+
 		Colegiado colegiado1= new Colegiado(null,"Colcic",curso1);
 		Materia materia1 = new Materia(null, "Analise de Sistema de informação", "cet352");
 		dpto1.setProfessores(Arrays.asList(prof1));
-		dpto1.setCursos(Arrays.asList(curso1));
-
+		dpto1.setCursos(Arrays.asList(curso1,curso2));
+		
 		prof1.setCursos(Arrays.asList(curso1));
 		curso1.getProfessores().addAll(Arrays.asList(prof1));
 		curso1.setColegiado(colegiado1);
@@ -45,7 +47,7 @@ public class DBService {
 
 		professorRepository.saveAll(Arrays.asList(prof1));
 		departamentoRepository.saveAll(Arrays.asList(dpto1));
-		cursoRepository.saveAll(Arrays.asList(curso1));
+		cursoRepository.saveAll(Arrays.asList(curso1,curso2));
 		materiaRepository.saveAll(Arrays.asList(materia1));
 
   }

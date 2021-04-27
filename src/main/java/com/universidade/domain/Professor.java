@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Professor implements Serializable {
@@ -22,7 +24,9 @@ public class Professor implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
   private String nome;
+  @NotNull(message = "Endereco nao pode ser nulo")
   private String endereco;
 
   @JsonIgnore
@@ -41,11 +45,14 @@ public class Professor implements Serializable {
     this.cursos = cursos;
   }
 
+
+
   public Professor(){
   
   }
 
-  public Professor(String nome, String endereco, Departamento departamento) {
+  public Professor(Integer id,String nome, String endereco, Departamento departamento) {
+    this.id=id;
     this.nome = nome;
     this.endereco = endereco;
     this.departamento = departamento;

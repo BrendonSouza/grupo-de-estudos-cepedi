@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.universidade.domain.Departamento;
 import com.universidade.repositories.DepartamentoRepository;
+import com.universidade.services.exceptions.IllegalArgumentException;
 import com.universidade.services.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class DepartamentoService {
   
   
   public Departamento find(Integer id) {
+      if(id<0||id==null)
+        throw new IllegalArgumentException("O Id Informado é inválido: "+id);
     Optional<Departamento> obj = departamentoRepository.findById(id);
     return obj.orElseThrow(() -> new ObjectNotFoundException(
         "Departamento não encontrado cara! Id: " + id + ", Tipo: " + Departamento.class.getName()));

@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 
 @Entity
@@ -21,7 +24,10 @@ private static final long serialVersionUID = 1L;
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;  
 
+  @NotEmpty(message = "O nome não pode ser vazio")
+  @Length(min=5,max=80,message="O tamanho deve ser entre 5 e 80 caracteres")
   private String nome;
+  @Length(min=6,max=8, message = "O tamanho do codigo da disciplina deve ser entre 6 e 8 caracteres")
   private String codigo;
   
   @ManyToMany(mappedBy = "materias")

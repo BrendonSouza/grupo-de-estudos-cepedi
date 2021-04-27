@@ -3,6 +3,8 @@ package com.universidade.Controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.universidade.domain.Curso;
 import com.universidade.dto.CursoNewDTO;
 import com.universidade.services.CursoService;
@@ -34,7 +36,7 @@ public class CursoController {
   }
   //create & store
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Void> insert(@RequestBody  CursoNewDTO objDTO){
+  public ResponseEntity<Void> insert(@Valid @RequestBody  CursoNewDTO objDTO){
     Curso obj=service.fromDTO(objDTO);
     obj=service.insert(obj);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
