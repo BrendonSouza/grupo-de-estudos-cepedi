@@ -27,6 +27,7 @@ private static final long serialVersionUID = 1L;
   @NotEmpty(message = "O nome não pode ser vazio")
   @Length(min=5,max=80,message="O tamanho deve ser entre 5 e 80 caracteres")
   private String nome;
+  
   @Length(min=6,max=8, message = "O tamanho do codigo da disciplina deve ser entre 6 e 8 caracteres")
   private String codigo;
   

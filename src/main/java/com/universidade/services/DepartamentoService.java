@@ -19,7 +19,7 @@ public class DepartamentoService {
   
   
   public Departamento find(Integer id) {
-      if(id<0||id==null)
+      if(id==null||id<1)
         throw new IllegalArgumentException("O Id Informado é inválido: "+id);
     Optional<Departamento> obj = departamentoRepository.findById(id);
     return obj.orElseThrow(() -> new ObjectNotFoundException(

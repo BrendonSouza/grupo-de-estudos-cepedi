@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,6 +28,9 @@ public class Curso implements Serializable{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  //validar nome
+
+  @NotEmpty(message = "Nome não pode ser vazio")
   private String nome;
 
   @JsonIgnore

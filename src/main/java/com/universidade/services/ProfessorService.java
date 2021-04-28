@@ -28,7 +28,7 @@ public class ProfessorService {
   private CursoRepository cursoRepository;
 
   public Professor find(Integer id) {
-    if(id<0||id==null)
+    if(id==null||id<1)
       throw new IllegalArgumentException("O Id Informado é inválido: "+id);
     Optional<Professor> obj = professorRepository.findById(id);
     return obj.orElseThrow(() -> new ObjectNotFoundException(

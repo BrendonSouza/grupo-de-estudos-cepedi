@@ -17,6 +17,7 @@ public class Colegiado implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+  
   @NotNull(message = "Nome do colegiado nao pode ser nulo")
   @NotEmpty(message = "Nome nao pode ser vazio")
   private String nome;

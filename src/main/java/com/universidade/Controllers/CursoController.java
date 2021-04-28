@@ -11,10 +11,12 @@ import com.universidade.services.CursoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -24,18 +26,18 @@ public class CursoController {
   @Autowired
   CursoService service;
   //show
-  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+  @GetMapping(value = "/{id}")
   public ResponseEntity<Curso> findDpto(@PathVariable Integer id){
     Curso obj = service.find(id);
     return ResponseEntity.ok().body(obj);
   } 
   //index
-  @RequestMapping
+  @GetMapping
   public ResponseEntity<List<Curso>> findAll(){
     return ResponseEntity.ok().body(service.findAll());
   }
   //create & store
-  @RequestMapping(method = RequestMethod.POST)
+  @PostMapping
   public ResponseEntity<Void> insert(@Valid @RequestBody  CursoNewDTO objDTO){
     Curso obj=service.fromDTO(objDTO);
     obj=service.insert(obj);
@@ -43,7 +45,7 @@ public class CursoController {
     return ResponseEntity.created(uri).build();
   }
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+  @DeleteMapping(value = "/{id}")
   public ResponseEntity<Void> delete(@PathVariable Integer id) {
     service.delete(id);
     return ResponseEntity.noContent().build();

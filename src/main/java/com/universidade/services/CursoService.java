@@ -28,7 +28,7 @@ public class CursoService {
   // @Autowired
   // private CursoRepository cursoRepository;
   public Curso find(Integer id) {
-    if(id<0||id==null)
+    if(id==null||id<=0)
       throw new IllegalArgumentException("O Id Informado é inválido: "+id);
     Optional<Curso> obj = cursoRepository.findById(id);
     return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -46,6 +46,7 @@ public class CursoService {
     return obj;
   }
 
+  //verificar id colegiado
   public Curso fromDTO(CursoNewDTO objDTO){
     Optional<Departamento> depto=departamentoRepository.findById(objDTO.getDepartamentoId());
     Departamento dpt=depto.orElseThrow(() -> new ObjectNotFoundException(
